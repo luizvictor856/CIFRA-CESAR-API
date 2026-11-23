@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.luiz</groupId>
-	<artifactId>cifra-vernam-api</artifactId>
+	<artifactId>cifra-cesar-api</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name/>
 	<description/>

@@ -22,7 +22,21 @@ Trabalho realizado individualmente.
 - JUnit 5
 - Base64
 
-## 4. Como executar o projeto
+## 4. Links do projeto
+
+**Repositório GitHub:**
+
+https://github.com/luizvictor856/cifra-vernam-api
+
+**API hospedada no Vercel:**
+
+https://cifra-vernam-api.vercel.app
+
+**Documentação Swagger:**
+
+https://cifra-vernam-api.vercel.app/swagger-ui/index.html
+
+## 5. Como executar o projeto
 
 ### Pré-requisitos
 
@@ -39,7 +53,7 @@ Abra a pasta `cifra-vernam-api` no Visual Studio Code.
 Abra o terminal na raiz do projeto, onde está localizado o arquivo `pom.xml`, e execute:
 
 ```powershell
-.\mvnw.cmd spring-boot:run
+.\mvnw\.cmd spring-boot:run
 ```
 
 Aguarde a inicialização do Spring Boot.
@@ -48,11 +62,11 @@ Quando a aplicação estiver iniciada, estará disponível em:
 
 `http://localhost:8080`
 
-## 5. Endpoints disponíveis
+## 6. Endpoints disponíveis
 
 A API possui dois endpoints principais.
 
-### 5.1 Criptografar mensagem
+### 6.1 Criptografar mensagem
 
 **Método:** POST
 
@@ -77,7 +91,7 @@ A API possui dois endpoints principais.
 }
 ```
 
-### 5.2 Descriptografar mensagem
+### 6.2 Descriptografar mensagem
 
 **Método:** POST
 
@@ -102,7 +116,7 @@ A API possui dois endpoints principais.
 }
 ```
 
-## 6. Validações e tratamento de erros
+## 7. Validações e tratamento de erros
 
 A aplicação possui validações para impedir o recebimento de campos vazios e verifica se a chave possui o mesmo tamanho da mensagem em bytes.
 
@@ -110,15 +124,15 @@ Também possui tratamento para mensagens criptografadas com formato Base64 invá
 
 Os erros de entrada são retornados com o código HTTP 400 (Bad Request).
 
-## 7. Testes
+## 8. Testes
 
 Os testes automatizados podem ser executados pelo terminal, na raiz do projeto, utilizando:
 
 ```powershell
-.\mvnw.cmd test
+.\mvnw\.cmd test
 ```
 
-## 8. Observação
+## 9. Observação
 
 A aplicação utiliza a operação XOR para realizar a criptografia e a descriptografia. O resultado criptografado é convertido para Base64 para facilitar sua representação e transmissão em formato textual.
 

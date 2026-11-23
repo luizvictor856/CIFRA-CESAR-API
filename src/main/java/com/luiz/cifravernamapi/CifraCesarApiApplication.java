@@ -4,10 +4,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class CifraVernamApiApplication {
+public class CifraCesarApiApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(CifraVernamApiApplication.class, args);
+		SpringApplication.run(CifraCesarApiApplication.class, args);
 	}
 
 }
