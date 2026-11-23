@@ -1,138 +1,162 @@
-# API de Criptografia — Cifra de Vernam
+# API de Cifra de César
 
-## 1. Sobre o projeto
+## Descrição do Projeto
 
-Este projeto consiste no desenvolvimento de uma API REST para criptografar e descriptografar mensagens utilizando a Cifra de Vernam.
+Este projeto consiste no desenvolvimento de uma API REST utilizando Java e Spring Boot, capaz de cifrar e decifrar textos utilizando o método da Cifra de César.
 
-A aplicação foi desenvolvida em Java com Spring Boot e permite realizar operações de criptografia e descriptografia por meio de requisições HTTP.
+A aplicação permite realizar a criptografia de textos por meio de um deslocamento definido pelo usuário, a descriptografia utilizando um deslocamento conhecido e a descriptografia por força bruta, tentando identificar automaticamente o texto original.
 
-## 2. Integrante
+## Autor
 
-- Luiz Victor Carneiro Bueno
+**Luiz Victor Carneiro Bueno**
 
-Trabalho realizado individualmente.
+**Modalidade:** Atividade individual
 
-## 3. Tecnologias utilizadas
+## Tecnologias Utilizadas
 
-- Java 25
+- Java
 - Spring Boot
 - Maven
-- Spring Web
-- Spring Validation
-- JUnit 5
-- Base64
+- REST API
+- JUnit
+- Swagger / OpenAPI
 
-## 4. Links do projeto
+## Funcionalidades
 
-**Repositório GitHub:**
+A API disponibiliza três endpoints principais:
 
-https://github.com/luizvictor856/cifra-vernam-api
+### 1. Cifrar texto
 
-**API hospedada no Vercel:**
+**Endpoint:** `POST /cifrar`
 
-https://cifra-vernam-api.vercel.app
+Recebe um texto original e um valor de deslocamento, retornando o texto cifrado.
 
-**Documentação Swagger:**
+Exemplo de requisição:
 
-https://cifra-vernam-api.vercel.app/swagger-ui/index.html
+```json
+{
+  "textoClaro": "ola mundo",
+  "deslocamento": 3
+}
+```
 
-## 5. Como executar o projeto
+Resposta:
+
+```json
+{
+  "textoCifrado": "rod pxqgr"
+}
+```
+
+### 2. Decifrar texto
+
+**Endpoint:** `POST /decifrar`
+
+Recebe um texto cifrado e o deslocamento utilizado, retornando o texto original.
+
+Exemplo de requisição:
+
+```json
+{
+  "textoCifrado": "rod pxqgr",
+  "deslocamento": 3
+}
+```
+
+Resposta:
+
+```json
+{
+  "textoClaro": "ola mundo"
+}
+```
+
+### 3. Decifrar por força bruta
+
+**Endpoint:** `POST /decifrarForcaBruta`
+
+Recebe um texto cifrado sem a necessidade de informar o deslocamento. A aplicação testa as possibilidades de deslocamento da Cifra de César e utiliza uma base de palavras em português para auxiliar na identificação da provável mensagem original.
+
+Exemplo de requisição:
+
+```json
+{
+  "textoCifrado": "rod pxqgr"
+}
+```
+
+Resposta:
+
+```json
+{
+  "textoClaro": "ola mundo"
+}
+```
+
+## Funcionamento da Cifra de César
+
+A Cifra de César é um método de criptografia baseado na substituição de letras por outras que se encontram a uma determinada distância no alfabeto.
+
+O deslocamento define quantas posições cada letra será movimentada. Por exemplo, utilizando um deslocamento de 3:
+
+| Texto original | Texto cifrado |
+|---|---|
+| A | D |
+| B | E |
+| C | F |
+| X | A |
+| Y | B |
+| Z | C |
+
+A aplicação considera letras maiúsculas e minúsculas, preservando a formatação do texto. Caracteres que não fazem parte do alfabeto, como espaços, números e pontuação, são mantidos.
+
+## Execução do Projeto
 
 ### Pré-requisitos
 
-- Java JDK 25 instalado.
-- Visual Studio Code ou outra IDE compatível.
-- Terminal de comandos.
+- Java instalado
+- Git (opcional, para clonar o repositório)
 
-### Passo 1 — Abrir o projeto
+### Clonar o repositório
 
-Abra a pasta `cifra-vernam-api` no Visual Studio Code.
+```bash
+git clone https://github.com/luizvictor856/CIFRA-CESAR-API.git
+```
 
-### Passo 2 — Executar a aplicação
+### Acessar a pasta do projeto
 
-Abra o terminal na raiz do projeto, onde está localizado o arquivo `pom.xml`, e execute:
+```bash
+cd CIFRA-CESAR-API
+```
+
+### Executar a aplicação
+
+No Windows, utilize o Maven Wrapper:
 
 ```powershell
-.\mvnw\.cmd spring-boot:run
+.\mvnw.cmd spring-boot:run
 ```
 
-Aguarde a inicialização do Spring Boot.
+Após a inicialização, a API estará disponível localmente na porta 8080.
 
-Quando a aplicação estiver iniciada, estará disponível em:
+## Documentação da API
 
-`http://localhost:8080`
+Caso o Swagger esteja habilitado, a documentação interativa pode ser acessada pelo navegador:
 
-## 6. Endpoints disponíveis
+http://localhost:8080/swagger-ui/index.html
 
-A API possui dois endpoints principais.
+Por meio do Swagger, é possível visualizar os endpoints disponíveis e realizar requisições diretamente pela interface.
 
-### 6.1 Criptografar mensagem
+## Testes
 
-**Método:** POST
+O projeto foi submetido a testes de funcionamento dos endpoints de cifragem, decifragem e decifragem por força bruta, utilizando diferentes textos, deslocamentos e combinações de caracteres.
 
-**Endpoint:**
+## Repositório
 
-`http://localhost:8080/vernam/criptografar`
+GitHub:
 
-**Corpo da requisição (JSON):**
+https://github.com/luizvictor856/CIFRA-CESAR-API.git
 
-```json
-{
-    "mensagem": "OLA MUNDO",
-    "chave": "123456789"
-}
-```
+## Considerações finais
 
-**Resposta esperada:**
-
-```json
-{
-    "resultado": "fn5yFHhjeXx2"
-}
-```
-
-### 6.2 Descriptografar mensagem
-
-**Método:** POST
-
-**Endpoint:**
-
-`http://localhost:8080/vernam/descriptografar`
-
-**Corpo da requisição (JSON):**
-
-```json
-{
-    "mensagem": "fn5yFHhjeXx2",
-    "chave": "123456789"
-}
-```
-
-**Resposta esperada:**
-
-```json
-{
-    "resultado": "OLA MUNDO"
-}
-```
-
-## 7. Validações e tratamento de erros
-
-A aplicação possui validações para impedir o recebimento de campos vazios e verifica se a chave possui o mesmo tamanho da mensagem em bytes.
-
-Também possui tratamento para mensagens criptografadas com formato Base64 inválido.
-
-Os erros de entrada são retornados com o código HTTP 400 (Bad Request).
-
-## 8. Testes
-
-Os testes automatizados podem ser executados pelo terminal, na raiz do projeto, utilizando:
-
-```powershell
-.\mvnw\.cmd test
-```
-
-## 9. Observação
-
-A aplicação utiliza a operação XOR para realizar a criptografia e a descriptografia. O resultado criptografado é convertido para Base64 para facilitar sua representação e transmissão em formato textual.
-
+O projeto foi desenvolvido individualmente como atividade acadêmica, com o objetivo de aplicar conhecimentos de desenvolvimento de APIs REST, Java, Spring Boot, lógica de programação, criptografia por substituição e testes de software.
